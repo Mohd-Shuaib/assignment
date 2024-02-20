@@ -2,3 +2,6 @@ development:
   password: shptka_0643779732f255a91653276561429edb
   theme_id: "123571994757"
   store: the-crafteria1.myshopify.com
+  timeout: 1000s
+  ignore_files:
+    - config/settings_data.json

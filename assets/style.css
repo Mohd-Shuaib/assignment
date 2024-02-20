@@ -92,7 +92,7 @@ span.slider-counter--current {
 }
 
 body .buckscc-currency-wrapper {
-    display: none !important;
+    display: none !important ;
 }
 
 @media (max-width: 768px) {

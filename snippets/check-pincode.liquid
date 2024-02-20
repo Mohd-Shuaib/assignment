@@ -1,0 +1,88 @@
+<div class="checkpincode">
+    <input type="text" name="pincode" id="checkpin" placeholder="Enter PIN Code">
+    <label id="checkbtn">Check</label>
+    <p class="checkstatus"></p>
+</div>
+
+<style>
+    .checkpincode input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        border-radius: 4px 0 0 4px;
+        font-size: 14px;
+
+    }
+
+    .checkpincode label {
+        background-color: #000;
+        color: #fff;
+        border-radius: 0 4px 4px 0;
+        border: 0;
+        padding: 12px 30px;
+        cursor: pointer;
+        margin-left: -3px;
+    }
+
+    .checkpincode input:focus-visible {
+        outline: 0;
+        box-shadow: 0px 0px;
+    }
+
+    .green {
+        font-size: 15px;
+        color: green;
+        font-weight: bold;
+    }
+
+    .red {
+        font-size: 15px;
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    var zipcodes = [{{ settings.pincode }} ];
+
+    function checkpincode() {
+        var zipcode = document.getElementById('checkpin').value;
+        if (zipcode.length <= 6) {
+            if (zipcodes.includes(parseInt(zipcode))) {
+                document.querySelector('.checkstatus').innerHTML = '<span class="green">Delivery Available for this Pin</span>';
+                setTimeout(function(){
+                    document.querySelector('.checkstatus').innerHTML = '';
+                },3000);
+                document.querySelector('.product-form__submit').removeAttribute("disabled");
+            } else {
+                document.querySelector('.checkstatus').innerHTML = '<span class="red">Delivery Not Available for this Pin</span>';
+                setTimeout(function(){
+                    document.querySelector('.checkstatus').innerHTML = '';
+                },3000);
+                document.querySelector('.product-form__submit').setAttribute("disabled","true");
+
+            }
+        } else {
+            document.querySelector('.checkstatus').innerHTML = '<span class="red">Please Add 6 digit only</span>'
+            setTimeout(function(){
+                    document.querySelector('.checkstatus').innerHTML = '';
+                },3000)
+
+        }
+
+
+    }
+
+    var checkbtn = document.getElementById('checkbtn');
+    checkbtn.addEventListener('click', checkpincode);
+
+    document.getElementById('checkpin').addEventListener('keyup',function(){
+        checkval = this.value;
+        if(checkval.length > 6){
+            document.querySelector('.checkstatus').innerHTML = '<span class="red">Please Add 6 digit only</span>'
+        }else{
+            document.querySelector('.checkstatus').innerHTML = ''
+
+        }
+    })
+</script>
